@@ -29,7 +29,6 @@ local ipr_angle_move = 20 do
         if ipr_check_player(ply) then
             return
         end
-
         local ipr_delay_input = CurTime()
         if ipr_delay_input > (ply.delayinput3rdp or 0) then
             if input.IsKeyDown(ipr_thirdp.inputenable) then
@@ -47,7 +46,6 @@ local ipr_angle_move = 20 do
             if input.IsKeyDown(ipr_thirdp.inputbehindcam) then
                 if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
             end
-            print("load")
             ply.delayinput3rdp = ipr_delay_input + 0.2
         end
     end)
