@@ -26,20 +26,29 @@ end
 local ipr_angle_move = 20 do
     local ipr_input_cam_bool
     hook.Add( "PlayerButtonDown", "ipr_thirdp_playerbut_down", function(ply, button)
-        if input.IsKeyDown(ipr_thirdp.inputenable) then
-            if not IsValid(ply) or ipr_check_player(ply) then
-                return
-            end
-            ipr_enable_pass()
-        end
-        if ipr_thirdp_enable then
+        if ipr_check_player(ply) then
             return
         end
-        if input.IsKeyDown(ipr_thirdp.inputmovecam) then
-            if not ipr_input_cam_bool then ipr_angle_move = -ipr_angle_move ipr_input_cam_bool = true else ipr_angle_move = ipr_angle_move ipr_input_cam_bool = false end
-        end
-        if input.IsKeyDown(ipr_thirdp.inputbehindcam) then
-            if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
+
+        local ipr_delay_input = CurTime()
+        if ipr_delay_input > (ply.delayinput3rdp or 0) then
+            if input.IsKeyDown(ipr_thirdp.inputenable) then
+                if not IsValid(ply) then
+                    return
+                end
+                ipr_enable_pass()
+            end
+            if ipr_thirdp_enable then
+                return
+            end
+            if input.IsKeyDown(ipr_thirdp.inputmovecam) then
+                if not ipr_input_cam_bool then ipr_angle_move = -ipr_angle_move ipr_input_cam_bool = true else ipr_angle_move = ipr_angle_move ipr_input_cam_bool = false end
+            end
+            if input.IsKeyDown(ipr_thirdp.inputbehindcam) then
+                if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
+            end
+            print("load")
+            ply.delayinput3rdp = ipr_delay_input + 0.2
         end
     end)
 end
