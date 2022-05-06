@@ -26,11 +26,11 @@ end
 local ipr_angle_move = 20 do
     local ipr_input_cam_bool
     hook.Add( "PlayerButtonDown", "ipr_thirdp_playerbut_down", function(ply, button)
-        if ipr_check_player(ply) then
-            return
-        end
         local ipr_delay_input = CurTime()
         if ipr_delay_input > (ply.delayinput3rdp or 0) then
+            if ipr_check_player(ply) then
+                return
+            end
             if input.IsKeyDown(ipr_thirdp.inputenable) then
                 ipr_enable_pass()
             end
