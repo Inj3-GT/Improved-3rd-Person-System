@@ -1,5 +1,5 @@
 # Improved-3rd-Person-System
-Path for Config file : improved_3rd_person_system\lua\autorun\ipr_thirdperson_sys_config.lua
+- Path for Config file : improved_3rd_person_system\lua\autorun\ipr_thirdperson_sys_config.lua
 
 - Activate with the F1 key on your keyboard.
 - Change the shoulder camera with the P key on your keyboard.
@@ -11,7 +11,6 @@ Path for Config file : improved_3rd_person_system\lua\autorun\ipr_thirdperson_sy
 - Crosshair 3d2d included (active only in 3rd person).
 - Console command: ipr_thirdp
 - Optimized code.
-- Simple configuration.
 
 For developers (You can use this hook to find out the status of the third person) :
 
