@@ -19,7 +19,7 @@ end
 
 local function ipr_enable_pass()
     if not ipr_thirdp_enable then ipr_thirdp_enable = true else ipr_thirdp_enable = false ipr_input_cam_rotate = false end
-    hook.Call("IprThirdpCustomFunc", nil, ipr_thirdp_enable and false or not ipr_thirdp_enable and true)
+    hook.Call("IprThirdpCustomFunc", nil, ipr_thirdp_enable)
 end
  
 local ipr_angle_move = ipr_thirdp.centercam and 5 or 20 do
