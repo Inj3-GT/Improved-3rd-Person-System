@@ -32,7 +32,6 @@ local ipr_angle_move = ipr_thirdp.centercam and 5 or 20 do
             end
             if input.IsKeyDown(ipr_thirdp.inputenable) then
                 ipr_enable_pass()
-                return
             end
             if ipr_thirdp_enable then
                 if not ipr_thirdp.centercam and not ipr_thirdp.disablecamswap and input.IsKeyDown(ipr_thirdp.inputmovecam) then
