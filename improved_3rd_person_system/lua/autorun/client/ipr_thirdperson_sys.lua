@@ -32,9 +32,6 @@ local ipr_angle_move = 20 do
         local ipr_delay_input = CurTime()
         if ipr_delay_input > (ply.delayinput3rdp or 0) then
             if input.IsKeyDown(ipr_thirdp.inputenable) then
-                if not IsValid(ply) then
-                    return
-                end
                 ipr_enable_pass()
             end
             if not ipr_thirdp_enable then
