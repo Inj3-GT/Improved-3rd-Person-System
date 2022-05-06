@@ -46,7 +46,7 @@ local ipr_angle_move = 20 do
             if input.IsKeyDown(ipr_thirdp.inputbehindcam) then
                 if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
             end
-            ply.delayinput3rdp = ipr_delay_input + 0.2
+            ply.delayinput3rdp = ipr_delay_input + 0.3
         end
     end)
 end
