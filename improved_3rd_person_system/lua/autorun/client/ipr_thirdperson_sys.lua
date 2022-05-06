@@ -2,7 +2,7 @@
 --- Script By Inj3
 --- Script By Inj3
 ---- https://steamcommunity.com/id/Inj3/
-local ipr_thirdp_enable, ipr_input_cam_rotate = ipr_thirdp.spawnthirdp and false or not ipr_thirdp.spawnthirdp and true
+local ipr_thirdp_enable, ipr_input_cam_rotate = ipr_thirdp.spawnthirdp
 
 local function ipr_check_player(ipr_player, ipr_bool)
     if (ipr_bool) then
@@ -18,8 +18,7 @@ local function ipr_check_player(ipr_player, ipr_bool)
 end
 
 local function ipr_enable_pass()
-    ipr_thirdp_enable = not ipr_thirdp_enable
-    if not ipr_thirdp_enable then ipr_input_cam_rotate = false end
+    if not ipr_thirdp_enable then ipr_thirdp_enable = true else ipr_thirdp_enable = false ipr_input_cam_rotate = false end
     hook.Call("IprThirdpCustomFunc", nil, ipr_thirdp_enable and false or not ipr_thirdp_enable and true)
 end
  
@@ -35,7 +34,7 @@ local ipr_angle_move = ipr_thirdp.centercam and 5 or 20 do
                 ipr_enable_pass()
                 return
             end
-            if not ipr_thirdp_enable then
+            if ipr_thirdp_enable then
                 if not ipr_thirdp.centercam and not ipr_thirdp.disablecamswap and input.IsKeyDown(ipr_thirdp.inputmovecam) then
                     if not ipr_input_cam_bool then ipr_angle_move = -ipr_angle_move ipr_input_cam_bool = true else ipr_angle_move = ipr_angle_move ipr_input_cam_bool = false end
                 end
@@ -51,7 +50,7 @@ end
 do
     local ipr_lerp_a, ipr_lerp_b, ipr_lerp_c = 0, 0, 0
     hook.Add("CalcView", "ipr_thirdp_calcview", function(ply, origin, angles, fov, znear, zfar)
-        if ipr_thirdp_enable or ipr_check_player(ply) then
+        if not ipr_thirdp_enable or ipr_check_player(ply) then
             return
         end
         if (ipr_input_cam_rotate) then
@@ -75,7 +74,7 @@ do
     end)
 
     hook.Add("InputMouseApply", "ipr_thirdp_inputmouse", function(cmd, x, y, ang)
-        if ipr_thirdp_enable then
+        if not ipr_thirdp_enable then
             return
         end
         local ipr_player = LocalPlayer()
@@ -118,7 +117,7 @@ do
 end
 
 hook.Add("PostDrawTranslucentRenderables", "ipr_thirdp_drawtranslucent", function(bDrawingDepth, bDrawingSkybox, isDraw3DSkybox)
-    if not ipr_thirdp.crosshair3denable or ipr_thirdp_enable then
+    if not ipr_thirdp.crosshair3denable or not ipr_thirdp_enable then
         return
     end
     local ipr_player = LocalPlayer()
