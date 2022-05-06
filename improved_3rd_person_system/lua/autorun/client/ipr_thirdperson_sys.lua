@@ -37,14 +37,13 @@ local ipr_angle_move = 20 do
                 end
                 ipr_enable_pass()
             end
-            if ipr_thirdp_enable then
-                return
-            end
-            if input.IsKeyDown(ipr_thirdp.inputmovecam) then
-                if not ipr_input_cam_bool then ipr_angle_move = -ipr_angle_move ipr_input_cam_bool = true else ipr_angle_move = ipr_angle_move ipr_input_cam_bool = false end
-            end
-            if input.IsKeyDown(ipr_thirdp.inputbehindcam) then
-                if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
+            if not ipr_thirdp_enable then
+                if input.IsKeyDown(ipr_thirdp.inputmovecam) then
+                    if not ipr_input_cam_bool then ipr_angle_move = -ipr_angle_move ipr_input_cam_bool = true else ipr_angle_move = ipr_angle_move ipr_input_cam_bool = false end
+                end
+                if input.IsKeyDown(ipr_thirdp.inputbehindcam) then
+                    if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
+                end
             end
             ply.delayinput3rdp = ipr_delay_input + 0.3
         end
