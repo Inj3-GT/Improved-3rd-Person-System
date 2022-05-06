@@ -22,8 +22,8 @@ local function ipr_enable_pass()
     if not ipr_thirdp_enable then ipr_input_cam_rotate = false end
     hook.Call("IprThirdpCustomFunc", nil, ipr_thirdp_enable and false or not ipr_thirdp_enable and true)
 end
-
-local ipr_angle_move = 20 do
+ 
+local ipr_angle_move = ipr_thirdp.centercam and 5 or 20 do
     local ipr_input_cam_bool
     hook.Add( "PlayerButtonDown", "ipr_thirdp_playerbut_down", function(ply, button)
         local ipr_delay_input = CurTime()
@@ -33,12 +33,13 @@ local ipr_angle_move = 20 do
             end
             if input.IsKeyDown(ipr_thirdp.inputenable) then
                 ipr_enable_pass()
+                return
             end
             if not ipr_thirdp_enable then
-                if input.IsKeyDown(ipr_thirdp.inputmovecam) then
+                if not ipr_thirdp.centercam and not disablecamswap and input.IsKeyDown(ipr_thirdp.inputmovecam) then
                     if not ipr_input_cam_bool then ipr_angle_move = -ipr_angle_move ipr_input_cam_bool = true else ipr_angle_move = ipr_angle_move ipr_input_cam_bool = false end
                 end
-                if input.IsKeyDown(ipr_thirdp.inputbehindcam) then
+                if not ipr_thirdp.disablecambhdview and input.IsKeyDown(ipr_thirdp.inputbehindcam) then
                     if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
                 end
             end
