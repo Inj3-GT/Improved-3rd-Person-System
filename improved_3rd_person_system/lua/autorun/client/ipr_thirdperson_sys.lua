@@ -4,7 +4,7 @@
 ---- https://steamcommunity.com/id/Inj3/
 local ipr_thirdp_enable, ipr_input_cam_rotate = ipr_thirdp.spawnthirdp
 
-function ipr_call_thirdp()
+function ipr_thirdp.call()
     return ipr_thirdp_enable
 end
 
