@@ -14,7 +14,7 @@
 
 For developers (client) :
 
--- You can use this hook to find out the status of the third person.
+-- You can use this hook to find out the status of the 3rd person.
 Example : 
 hook.Add("IprThirdpCustomFunc", "UniqueName_Hook", function(status)
     if (status) then
