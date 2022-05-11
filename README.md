@@ -10,7 +10,7 @@
 - Configure whether players should appear in 1st, or 3rd person view.
 - Crosshair 3d2d included (active only in 3rd person).
 - Console command: ipr_thirdp
-- Optimized code.
+- Optimized code, no FPS IMPACT ! 
 
 For developers (You can use this hook to find out the status of the third person) :
 
