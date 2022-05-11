@@ -4,6 +4,10 @@
 ---- https://steamcommunity.com/id/Inj3/
 local ipr_thirdp_enable, ipr_input_cam_rotate = ipr_thirdp.spawnthirdp
 
+function ipr_call_thirdp()
+    return ipr_thirdp_enable
+end
+
 local function ipr_check_player(ipr_player, ipr_bool)
     if (ipr_bool) then
         if (IsValid(ipr_player:GetActiveWeapon()) and ipr_player:GetActiveWeapon():GetMaxClip1() < 1) then
