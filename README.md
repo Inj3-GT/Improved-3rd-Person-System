@@ -12,9 +12,10 @@
 - Console command: ipr_thirdp
 - Optimized code, no FPS IMPACT ! 
 
-For developers (You can use this hook to find out the status of the third person) :
+For developers (client) :
 
-Example (client-side) : 
+-- You can use this hook to find out the status of the third person.
+Example : 
 hook.Add("IprThirdpCustomFunc", "UniqueName_Hook", function(status)
     if (status) then
         hook.Remove("HUDPaint", "My_CrossHair")
@@ -22,3 +23,5 @@ hook.Add("IprThirdpCustomFunc", "UniqueName_Hook", function(status)
         hook.Add("HUDPaint", "My_CrossHair", My_CrossHair)
     end
 end)
+-- or you can use this function allows you to return the status of the 3rd person.
+ipr_thirdp.call() 
