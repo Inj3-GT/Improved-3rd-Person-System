@@ -18,11 +18,16 @@ local function ipr_check_player(ipr_player, ipr_bool)
             return true
         end
     end
+    
     return false
 end
 
 local function ipr_enable_pass()
-    if not ipr_thirdp_enable then ipr_thirdp_enable = true else ipr_thirdp_enable = false ipr_input_cam_rotate = false end
+    ipr_thirdp_enable = not ipr_thirdp_enable
+
+    if (ipr_thirdp_enable) then 
+        ipr_input_cam_rotate = false 
+    end
     hook.Call("IprThirdpCustomFunc", nil, ipr_thirdp_enable)
 end
  
@@ -45,6 +50,7 @@ local ipr_angle_move = ipr_thirdp.centercam and 5 or 20 do
                     if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
                 end
             end
+            
             ply.delayinput3rdp = ipr_delay_input + 0.3
         end
     end)
@@ -56,10 +62,7 @@ do
         if not ipr_thirdp_enable or ipr_check_player(ply) then
             return
         end
-        if (ipr_input_cam_rotate) then
-            angles:RotateAroundAxis( Vector(0,0,1), 175)
-        end
-        local ipr_angles = angles:Forward() * (65 + ipr_lerp_a) - angles:Right() * (ipr_lerp_c + ipr_angle_move) - angles:Up() * (1 + ipr_lerp_b)
+        local ipr_angles = (ipr_input_cam_rotate) and angles:RotateAroundAxis( Vector(0,0,1), 175) or angles:Forward() * (65 + ipr_lerp_a) - angles:Right() * (ipr_lerp_c + ipr_angle_move) - angles:Up() * (1 + ipr_lerp_b)
         local ipr_tracehull = util.TraceHull({
             start = origin,
             endpos = origin - ipr_angles,
@@ -86,36 +89,9 @@ do
         end
 
         local ipr_realframetime = RealFrameTime() * 2
-        if ipr_check_player(ipr_player, true) then
-            ipr_lerp_b = Lerp(ipr_realframetime, ipr_lerp_b, 15)
-        end
-
-        if ipr_player:KeyDown(IN_DUCK) then
-            ipr_lerp_a = Lerp(ipr_realframetime, ipr_lerp_a, -30)
-            ipr_lerp_b = Lerp(ipr_realframetime, ipr_lerp_b, 25)
-            ipr_lerp_c = Lerp(ipr_realframetime, ipr_lerp_c, 25)
-        end
-        if ipr_player:KeyDown(IN_JUMP) then
-            ipr_lerp_a = Lerp(ipr_realframetime, ipr_lerp_a, -15)
-        end
-        if ipr_player:KeyDown(IN_ATTACK2) then
-            ipr_lerp_a = Lerp(ipr_realframetime, ipr_lerp_a, -70)
-        end
-        if ipr_player:KeyDown(IN_FORWARD) then
-            ipr_lerp_a = Lerp(ipr_realframetime, ipr_lerp_a, 20)
-            if ipr_player:KeyDown(IN_SPEED) then
-                ipr_lerp_a = Lerp(ipr_realframetime, ipr_lerp_a, 35)
-            end
-        end
-        if ipr_player:KeyDown(IN_MOVERIGHT) then
-            ipr_lerp_c = Lerp(ipr_realframetime, ipr_lerp_c, 5)
-        elseif ipr_player:KeyDown(IN_MOVELEFT) then
-            ipr_lerp_c = Lerp(ipr_realframetime, ipr_lerp_c, -5)
-        end
-
-        ipr_lerp_a = Lerp(ipr_realframetime, ipr_lerp_a, 0)
-        ipr_lerp_b = Lerp(ipr_realframetime, ipr_lerp_b, 0)
-        ipr_lerp_c = Lerp(ipr_realframetime, ipr_lerp_c, 0)
+        ipr_lerp_b = Lerp(ipr_realframetime, ipr_lerp_b, ipr_check_player(ipr_player, true) and 15 or ipr_player:KeyDown(IN_DUCK) and 25 or 0)
+        ipr_lerp_a = Lerp(ipr_realframetime, ipr_lerp_a, ipr_player:KeyDown(IN_DUCK) and -30 or ipr_player:KeyDown(IN_JUMP) and -15 or ipr_player:KeyDown(IN_ATTACK2) and -70 or ipr_player:KeyDown(IN_FORWARD) and 20 or ipr_player:KeyDown(IN_FORWARD) and ipr_player:KeyDown(IN_SPEED) and 35 or 0)
+        ipr_lerp_c = Lerp(ipr_realframetime, ipr_lerp_c, ipr_player:KeyDown(IN_DUCK) and 25 or ipr_player:KeyDown(IN_MOVERIGHT) and 5 or ipr_player:KeyDown(IN_MOVELEFT) and -5 or 0)
     end)
 end
 
