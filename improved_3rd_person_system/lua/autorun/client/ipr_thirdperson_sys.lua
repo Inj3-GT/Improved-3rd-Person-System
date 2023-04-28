@@ -18,13 +18,11 @@ local function ipr_check_player(ipr_player, ipr_bool)
             return true
         end
     end
-    
     return false
 end
 
 local function ipr_enable_pass()
     ipr_thirdp_enable = not ipr_thirdp_enable
-
     if (ipr_thirdp_enable) then 
         ipr_input_cam_rotate = false 
     end
@@ -50,7 +48,6 @@ local ipr_angle_move = ipr_thirdp.centercam and 5 or 20 do
                     if not ipr_input_cam_rotate then ipr_input_cam_rotate = true else ipr_input_cam_rotate = false end
                 end
             end
-            
             ply.delayinput3rdp = ipr_delay_input + 0.3
         end
     end)
