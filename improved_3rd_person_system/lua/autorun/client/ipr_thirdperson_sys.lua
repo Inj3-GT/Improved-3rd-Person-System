@@ -23,6 +23,7 @@ end
 
 local function ipr_enable_pass()
     ipr_thirdp_enable = not ipr_thirdp_enable
+    
     if (ipr_thirdp_enable) then 
         ipr_input_cam_rotate = false 
     end
@@ -40,7 +41,7 @@ local ipr_angle_move = ipr_thirdp.centercam and 5 or 20 do
             if input.IsKeyDown(ipr_thirdp.inputenable) then
                 ipr_enable_pass()
             end
-            if ipr_thirdp_enable then
+            if (ipr_thirdp_enable) then
                 if not ipr_thirdp.centercam and not ipr_thirdp.disablecamswap and input.IsKeyDown(ipr_thirdp.inputmovecam) then
                     if not ipr_input_cam_bool then ipr_angle_move = -ipr_angle_move ipr_input_cam_bool = true else ipr_angle_move = ipr_angle_move ipr_input_cam_bool = false end
                 end
