@@ -23,10 +23,8 @@ end
 
 local function ipr_enable_pass()
     ipr_thirdp_enable = not ipr_thirdp_enable
+    ipr_input_cam_rotate = not ipr_thirdp_enable
     
-    if (ipr_thirdp_enable) then 
-        ipr_input_cam_rotate = false 
-    end
     hook.Call("IprThirdpCustomFunc", nil, ipr_thirdp_enable)
 end
  
